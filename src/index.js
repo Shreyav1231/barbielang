@@ -163,21 +163,29 @@ const outputDiv = document.getElementById('output');
 const blocklyDiv = document.getElementById('blocklyDiv');
 const ws = Blockly.inject(blocklyDiv, {toolbox, theme: Blockly.Themes.Barbie});
 
-// This function resets the code and output divs, shows the
-// generated code from the workspace, and evals the code.
-// In a real application, you probably shouldn't use `eval`.
-const runCode = () => {
+// This function updates the code div to show the generated code.
+const updateCode = () => {
   const code = javascriptGenerator.workspaceToCode(ws);
   codeDiv.innerText = code;
-
-  outputDiv.innerHTML = '';
-
-  eval(code);
 };
 
-// Load the initial state from storage and run the code.
+// This function executes the generated code and shows output.
+const runCode = () => {
+  const code = javascriptGenerator.workspaceToCode(ws);
+  outputDiv.innerHTML = '';
+  try {
+    eval(code);
+  } catch (error) {
+    console.error(error);
+    outputDiv.innerText = error.message;
+  }
+};
+
+document.getElementById('runButton').addEventListener('click', runCode);
+
+// Load the initial state from storage and update the code display.
 load(ws);
-runCode();
+updateCode();
 
 // Every time the workspace changes state, save the changes to storage.
 ws.addChangeListener((e) => {
@@ -187,11 +195,11 @@ ws.addChangeListener((e) => {
   save(ws);
 });
 
-// Whenever the workspace changes meaningfully, run the code again.
+// Whenever the workspace changes meaningfully, update the code preview.
 ws.addChangeListener((e) => {
-  // Don't run the code when the workspace finishes loading; we're
-  // already running it once when the application starts.
-  // Don't run the code during drags; we might have invalid state.
+  // Don't update when the workspace finishes loading; we're
+  // already doing it once when the application starts.
+  // Don't update during drags; we might have invalid state.
   if (
     e.isUiEvent ||
     e.type == Blockly.Events.FINISHED_LOADING ||
@@ -199,5 +207,5 @@ ws.addChangeListener((e) => {
   ) {
     return;
   }
-  runCode();
+  updateCode();
 });

@@ -53,6 +53,30 @@ code {
   background-color: rgb(247, 240, 228);
 }
 
+#runButton {
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-family: 'Bartex', sans-serif;
+  font-size: 1.2rem;
+  background-color: #FF69B4;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+#runButton:hover {
+  background-color: #FF1493;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+#runButton:active {
+  transform: translateY(0);
+}
+
 #output {
   height: 50%;
 }
