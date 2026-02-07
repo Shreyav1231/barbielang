@@ -21,6 +21,14 @@ const config = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        // Load Bartex.tff 
+        test: /\.ttf$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
+        },
+      }
     ],
   },
   plugins: [
