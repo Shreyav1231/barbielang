@@ -3,8 +3,12 @@
   src: url('../public/Bartex.ttf') format('truetype');
 }
 
+html {
+  background-color:#e0218a;
+}
+
 body {
-  margin: 0;
+  margin: 1;
   max-width: 100vw;
   font-family: 'Bartex', sans-serif;
 }
@@ -58,9 +62,16 @@ code {
   font-family: 'Bartex', sans-serif;
 }
 
+#quote {
+  font-style: italic;
+  color: #ffffff;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
 #generatedCode {
   flex: 1;
-  background-color: rgb(247, 240, 228);
+  background-color: rgb(255, 173, 221);
   overflow: auto;
 }
 
