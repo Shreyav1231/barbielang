@@ -70,7 +70,7 @@ Blockly.icons.MutatorIcon.prototype.initView = function (pointerdownListener) {
       d: 'M20 2v4M22 4h-4',
       fill: 'none',
       stroke: 'white',
-      'stroke-width ': '2',
+      //'stroke-width ': '2',
       'stroke-linecap': 'round',
     },
     sparklesGroup
@@ -273,8 +273,12 @@ function createGlitterBurst() {
 
 // Add glitter effect when blocks are deleted
 ws.addChangeListener((e) => {
-  if (e.type === Blockly.Events.BLOCK_DELETE) {
-    console.log('Block deleted! Creating glitter burst...');
+  // Only trigger glitter for actual block deletions from the main workspace
+  // Ignore flyout/toolbox deletions and other internal Blockly operations
+  if (e.type === Blockly.Events.BLOCK_DELETE && 
+      !e.isUiEvent && 
+      e.workspaceId === ws.id) {
+    console.log('Block deleted from workspace! Creating glitter burst...');
     createGlitterBurst();
   }
 });
