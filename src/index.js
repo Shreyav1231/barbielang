@@ -14,6 +14,8 @@ import barbieHead from '../public/barbie-head.png';
 import splashImage from '../public/splash-screen.png';
 import './barbie_interpreter';
 
+document.title = 'barbie-lang';
+
 document.getElementById('barbie-head').src = barbieHead;
 document.getElementById('splash-logo').src = splashImage;
 
@@ -252,15 +254,15 @@ const runCode = () => {
    outputDiv.innerHTML = '';
    console.clear();
    console.log('%c=== Barbie Program Execution ===', 'color: #FF69B4; font-weight: bold; font-size: 14px');
-   
+
    // Set up debug callback to stream logs to console in real-time
    window.BarbieInterpreter.setDebugCallback((msg) => {
      console.log(msg);
    });
-   
+
    try {
      const result = window.BarbieInterpreter.run(code);
-     
+
      if (result.ok) {
        const output = result.output;
        if (Array.isArray(output) && output.length > 0) {
