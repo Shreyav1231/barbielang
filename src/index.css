@@ -3,15 +3,35 @@
   src: url('../public/Bartex.ttf') format('truetype');
 }
 
+* {
+  font-family: 'Bartex', sans-serif !important;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 html {
   background-color:#e0218a;
+  /* Ensure rems are consistent */
+  font-size: 16px;
 }
 
 body {
   margin: 1;
   max-width: 100vw;
   font-family: 'Bartex', sans-serif;
-  overflow: hidden;
 }
 
 /* Glitter particle animation */
@@ -44,6 +64,13 @@ body {
     opacity: 0;
     transform: scale(0.5);
   }
+  font-size: 16px;
+}
+
+/* Apply font to Blockly widgets and tooltips explicitly */
+.blocklyWidgetDiv,
+.blocklyTooltipDiv {
+  font-family: 'Bartex', sans-serif;
 }
 
 /* Barbie-themed workspace background gradient */
@@ -65,8 +92,15 @@ svg.blocklySvg {
 }
 
 /* Apply Bartex font to block text */
-.blocklyText {
-  font-family: 'Bartex', sans-serif !important;
+svg.blocklySvg .blocklyText {
+  font-family: 'Bartex', sans-serif;
+  font-size: 15pt; /* Bumped from 13pt */
+}
+
+/* Apply Bartex font to toolbox labels */
+.blocklyToolboxCategoryLabel {
+  font-family: 'Bartex', sans-serif;
+  font-size: 20px;
 }
 
 pre,
@@ -187,4 +221,56 @@ code {
   border-bottom: 0;
   margin-left: -12px;
   margin-bottom: -12px;
+}
+
+/* Barbie Context Menu Theme */
+.blocklyContextMenu {
+  background-color: #FFF0F5 !important;
+  border: 2px solid #FF69B4 !important;
+  border-radius: 12px !important;
+  padding: 8px 0 !important;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3) !important;
+}
+
+.blocklyContextMenu .blocklyMenuItem {
+  color: #C71585 !important;
+  font-family: 'Bartex', sans-serif !important;
+  font-size: 14px !important;
+  padding: 6px 16px !important;
+  transition: all 0.2s ease;
+}
+
+.blocklyContextMenu .blocklyMenuItem:hover,
+.blocklyContextMenu .blocklyMenuItem.blocklyMenuItemHover {
+  background-color: #FFB6C1 !important;
+  color: #FFFFFF !important;
+}
+
+.blocklyContextMenu .blocklyMenuItemBorder {
+  display: none !important; /* Hide default borders if present */
+}/* Barbie Context Menu Theme */
+.blocklyWidgetDiv .blocklyContextMenu {
+  background-color: #FFF0F5;
+  border: 2px solid #FF69B4;
+  border-radius: 12px;
+  padding: 8px 0;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+}
+
+.blocklyWidgetDiv .blocklyContextMenu .blocklyMenuItem {
+  color: #C71585;
+  font-family: 'Bartex', sans-serif;
+  font-size: 18px; /* Bumped from 16px */
+  padding: 6px 16px;
+  transition: all 0.2s ease;
+}
+
+.blocklyWidgetDiv .blocklyContextMenu .blocklyMenuItem:hover,
+.blocklyWidgetDiv .blocklyContextMenu .blocklyMenuItem.blocklyMenuItemHover {
+  background-color: #FFB6C1;
+  color: #FFFFFF;
+}
+
+.blocklyWidgetDiv .blocklyContextMenu .blocklyMenuItemBorder {
+  display: none;
 }

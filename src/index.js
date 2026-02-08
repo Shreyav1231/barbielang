@@ -99,6 +99,11 @@ Blockly.Msg['CONTROLS_IF_ELSE_TITLE_ELSE'] = 'otherwise';
 // Define Barbie theme with pink colors
 Blockly.Themes.Barbie = Blockly.Theme.defineTheme('barbie', {
   base: Blockly.Themes.Classic,
+  fontStyle: {
+    family: '"Bartex", sans-serif',
+    weight: 'normal',
+    size: 15,
+  },
   blockStyles: {
     logic_blocks: {
       colourPrimary: '#FF69B4',
