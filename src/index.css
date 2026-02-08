@@ -3,25 +3,47 @@
   src: url('../public/Bartex.ttf') format('truetype');
 }
 
-* {
-  font-family: 'Bartex', sans-serif !important;
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
 html {
   background-color:#e0218a;
 }
 
 body {
-  width: 100vw;
+  margin: 1;
+  max-width: 100vw;
   font-family: 'Bartex', sans-serif;
+  overflow: hidden;
+}
+
+/* Glitter particle animation */
+.glitter-particle {
+  position: fixed;
+  width: 5px;
+  height: 10px;
+  background: radial-gradient(circle, #ffffff 0%, #ED5C9B 50%, #E0218A 100%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  box-shadow: 0 0 10px #E0218A, 0 0 10px #FFB6C1;
+  animation: glitterBurst 0.8s ease-out forwards;
+}
+
+@keyframes glitterBurst {
+  0% {
+    left: var(--start-x);
+    top: var(--start-y);
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    left: var(--end-x);
+    top: var(--end-y);
+    opacity: 0;
+    transform: scale(0.5);
+  }
 }
 
 /* Barbie-themed workspace background gradient */
@@ -35,7 +57,11 @@ body {
 
 /* Define the pink gradient SVG pattern */
 svg.blocklySvg {
-  background: linear-gradient(135deg, #FFF0F5 0%, #FFB6C1 50%, #FF69B4 100%);
+  background-image: url('../dist/images/BarbieLang.png');
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.8;
 }
 
 /* Apply Bartex font to block text */
@@ -46,18 +72,21 @@ svg.blocklySvg {
 pre,
 code {
   overflow: auto;
+  font-family: 'Bartex', monospace;
 }
 
 #pageContainer {
   display: flex;
   width: 100%;
-  height: 100vh;
+  max-width: 100vw;
+  height: 98vh;
 }
 
 #blocklyDiv {
   flex-basis: 100%;
   height: 100%;
   min-width: 600px;
+  
 }
 
 #outputPane {
@@ -68,6 +97,7 @@ code {
   height: 100%;
   overflow: auto;
   padding: 1rem;
+  font-family: 'Bartex', sans-serif;
 }
 
 #quote {
@@ -75,6 +105,7 @@ code {
   color: #ffffff;
   flex-direction: column;
   margin-bottom: 1rem;
+  
 }
 
 #generatedCode {
@@ -87,6 +118,7 @@ code {
 #runButton {
   margin: 10px 0;
   padding: 10px 20px;
+  font-family: 'Bartex', sans-serif;
   font-size: 1.2rem;
   background-color: #FF69B4;
   color: white;
@@ -138,6 +170,7 @@ code {
   min-height: 40px;
   min-width: 200px;
   color: #FF1493;
+  font-family: 'Bartex', sans-serif;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
@@ -154,31 +187,4 @@ code {
   border-bottom: 0;
   margin-left: -12px;
   margin-bottom: -12px;
-}
-
-/* Barbie Context Menu Theme */
-.blocklyContextMenu {
-  background-color: #FFF0F5 !important;
-  border: 2px solid #FF69B4 !important;
-  border-radius: 12px !important;
-  padding: 8px 0 !important;
-  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3) !important;
-}
-
-.blocklyContextMenu .blocklyMenuItem {
-  color: #C71585 !important;
-  font-family: 'Bartex', sans-serif !important;
-  font-size: 14px !important;
-  padding: 6px 16px !important;
-  transition: all 0.2s ease;
-}
-
-.blocklyContextMenu .blocklyMenuItem:hover,
-.blocklyContextMenu .blocklyMenuItem.blocklyMenuItemHover {
-  background-color: #FFB6C1 !important;
-  color: #FFFFFF !important;
-}
-
-.blocklyContextMenu .blocklyMenuItemBorder {
-  display: none !important; /* Hide default borders if present */
 }

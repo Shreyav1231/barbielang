@@ -70,7 +70,7 @@ Blockly.icons.MutatorIcon.prototype.initView = function (pointerdownListener) {
       d: 'M20 2v4M22 4h-4',
       fill: 'none',
       stroke: 'white',
-      'stroke-width': '2',
+      'stroke-width ': '2',
       'stroke-linecap': 'round',
     },
     sparklesGroup
@@ -217,24 +217,6 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-document.addEventListener('keydown', (e) => {
-  if (e.ctrlKey || e.metaKey) {
-    const currentScale = ws.getScale();
-    if (e.key === '+' || e.key === '=') {
-      e.preventDefault();
-      ws.setScale(currentScale * 1.2);
-    }
-    if (e.key === '-') {
-      e.preventDefault();
-      ws.setScale(currentScale / 1.2);
-    }
-    if (e.key === '0') {
-      e.preventDefault();
-      ws.setScale(1);
-    }
-  }
-});
-
 
 // Whenever the workspace changes meaningfully, update the code preview.
 ws.addChangeListener((e) => {
@@ -249,4 +231,50 @@ ws.addChangeListener((e) => {
     return;
   }
   updateCode();
+});
+
+// Function to create glitter particles
+function createGlitterBurst() {
+  const blocklyDiv = document.getElementById('blocklyDiv');
+  const rect = blocklyDiv.getBoundingClientRect();
+  
+  // Position near bottom-right where trashcan typically is
+  const centerX = rect.right - 80;
+  const centerY = rect.bottom - 80;
+  
+  // Create multiple glitter particles
+  for (let i = 0; i < 51; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'glitter-particle';
+    
+    // Random angle and distance
+    const angle = (Math.PI * 2 * i) / 51;
+    const distance = 50 + Math.random() * 30;
+    const endX = centerX + Math.cos(angle) * distance;
+    const endY = centerY + Math.sin(angle) * distance;
+    
+    // Set custom properties for animation
+    particle.style.setProperty('--start-x', `${centerX}px`);
+    particle.style.setProperty('--start-y', `${centerY}px`);
+    particle.style.setProperty('--end-x', `${endX}px`);
+    particle.style.setProperty('--end-y', `${endY}px`);
+    
+    // Random delay for staggered effect
+    particle.style.animationDelay = `${Math.random() * 0.1}s`;
+    
+    document.body.appendChild(particle);
+    
+    // Remove after animation
+    setTimeout(() => {
+      particle.remove();
+    }, 800);
+  }
+}
+
+// Add glitter effect when blocks are deleted
+ws.addChangeListener((e) => {
+  if (e.type === Blockly.Events.BLOCK_DELETE) {
+    console.log('Block deleted! Creating glitter burst...');
+    createGlitterBurst();
+  }
 });
