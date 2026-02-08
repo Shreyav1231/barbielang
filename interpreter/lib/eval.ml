@@ -66,8 +66,21 @@ let eval_binop op l r =
 (** Output buffer — collects all Ken.say output *)
 let output_buffer : string list ref = ref []
 
+(** Debug buffer — collects debug logging *)
+let debug_buffer : string list ref = ref []
+
+(** Debug callback for streaming logs *)
+let debug_callback : (string -> unit) ref = ref (fun _ -> ())
+
 let reset_output () = output_buffer := []
 let get_output () = List.rev !output_buffer
+
+let reset_debug () = debug_buffer := []
+let get_debug () = List.rev !debug_buffer
+
+let debug msg = 
+  debug_buffer := msg :: !debug_buffer;
+  !debug_callback msg
 
 let rec eval_expr (env : env) = function
   | Ast.Num f -> VNum f
@@ -142,18 +155,21 @@ let rec eval_expr (env : env) = function
        let values = List.map (eval_expr env) args in
        if List.length params <> List.length values then
          raise (Runtime_error (Printf.sprintf "Function %s expected %d arguments, got %d" name (List.length params) (List.length values)));
+       let arg_strs = List.map value_to_string values in
+       debug (Printf.sprintf "[CALL] %s(%s)" name (String.concat ", " arg_strs));
        let new_env = List.fold_left2 (fun e p v -> Env.add p v e) closure params values in
        (* Add the function itself to its environment for recursion *)
        let new_env = Env.add name (VFunc (params, body, closure)) new_env in
        (try eval_block new_env body; VNone
-        with Return_signal v -> v)
+        with Return_signal v -> (debug (Printf.sprintf "[RETURN] %s" (value_to_string v)); v))
      | _ -> raise (Runtime_error (Printf.sprintf "Unknown function: %s" name)))
 
 and eval_stmt (env : env) (stmt : Ast.stmt) : env =
-  match stmt with
-  | Ast.Assign (name, expr) ->
-    let v = eval_expr env expr in
-    Env.add name v env
+   match stmt with
+   | Ast.Assign (name, expr) ->
+     let v = eval_expr env expr in
+     debug (Printf.sprintf "[ASSIGN] %s = %s" name (value_to_string v));
+     Env.add name v env
   | Ast.Expr e ->
     ignore (eval_expr env e);
     env
@@ -172,14 +188,19 @@ and eval_stmt (env : env) (stmt : Ast.stmt) : env =
     try_branches branches
   | Ast.Keepgoing (cond, body) ->
     let rec loop current_env =
-      if is_truthy (eval_expr current_env cond) then
+      let cond_val = eval_expr current_env cond in
+      if is_truthy cond_val then (
+        debug (Printf.sprintf "[KEEPGOING] condition true");
         let next_env =
           try eval_block_to_env current_env body
           with Break_signal -> raise Break_signal
              | Kentinue_signal -> current_env
         in
         loop next_env
-      else current_env
+      ) else (
+        debug (Printf.sprintf "[KEEPGOING] condition false, exiting");
+        current_env
+      )
     in
     (try loop env with Break_signal -> env)
   | Ast.Somanytimes (count_expr, body) ->
@@ -232,8 +253,10 @@ and eval_block env stmts =
 and eval_block_to_env env stmts =
   List.fold_left (fun e s -> eval_stmt e s) env stmts
 
-let run (program : Ast.program) =
-  let env = create_env () in
-  reset_output ();
-  eval_block env program;
-  get_output ()
+let run ?(on_debug = fun _ -> ()) (program : Ast.program) =
+   debug_callback := on_debug;
+   let env = create_env () in
+   reset_output ();
+   reset_debug ();
+   eval_block env program;
+   (get_output (), get_debug ())

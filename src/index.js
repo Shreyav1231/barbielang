@@ -156,9 +156,14 @@ Blockly.Msg['CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE'] = 'kentinue';
 
 Blockly.Msg['MATH_MULTIPLICATION_SYMBOL'] = '*';
 Blockly.Msg['MATH_DIVISION_SYMBOL'] = '/';
+Blockly.Msg['MATH_POWER_SYMBOL'] = '**';
 
-Blockly.Msg['LOGIC_COMPARE_OPERATOR_LTE'] = '<=';
-Blockly.Msg['LOGIC_COMPARE_OPERATOR_GTE'] = '>=';
+Blockly.Msg['LOGIC_COMPARE_EQ'] = '==';
+Blockly.Msg['LOGIC_COMPARE_NEQ'] = '!=';
+Blockly.Msg['LOGIC_COMPARE_LT'] = '<';
+Blockly.Msg['LOGIC_COMPARE_LTE'] = '<=';
+Blockly.Msg['LOGIC_COMPARE_GT'] = '>';
+Blockly.Msg['LOGIC_COMPARE_GTE'] = '>=';
 
 // Define Barbie theme with pink colors
 Blockly.Themes.Barbie = Blockly.Theme.defineTheme('barbie', {
@@ -243,32 +248,43 @@ const updateCode = () => {
 
 // This function executes the generated code and shows output.
 const runCode = () => {
-  const code = barbieGenerator.workspaceToCode(ws);
-  outputDiv.innerHTML = '';
-  try {
-    const result = window.BarbieInterpreter.run(code);
-    if (result.ok) {
-      const output = result.output;
-      if (Array.isArray(output) && output.length > 0) {
-        output.forEach(line => {
-          const p = document.createElement('p');
-          p.style.margin = '5px 0';
-          p.innerText = line;
-          outputDiv.appendChild(p);
-        });
-      } else {
-        outputDiv.innerText = '(No output)';
-      }
-    } else {
-      const errorP = document.createElement('p');
-      errorP.style.color = 'red';
-      errorP.style.fontWeight = 'bold';
-      errorP.innerText = result.error;
-      outputDiv.appendChild(errorP);
-    }
-  } catch (error) {
-    outputDiv.innerText = 'Execution error: ' + error.message;
-  }
+   const code = barbieGenerator.workspaceToCode(ws);
+   outputDiv.innerHTML = '';
+   console.clear();
+   console.log('%c=== Barbie Program Execution ===', 'color: #FF69B4; font-weight: bold; font-size: 14px');
+   
+   // Set up debug callback to stream logs to console in real-time
+   window.BarbieInterpreter.setDebugCallback((msg) => {
+     console.log(msg);
+   });
+   
+   try {
+     const result = window.BarbieInterpreter.run(code);
+     
+     if (result.ok) {
+       const output = result.output;
+       if (Array.isArray(output) && output.length > 0) {
+         output.forEach(line => {
+           const p = document.createElement('p');
+           p.style.margin = '5px 0';
+           p.innerText = line;
+           outputDiv.appendChild(p);
+         });
+       } else {
+         outputDiv.innerText = '(No output)';
+       }
+     } else {
+       const errorP = document.createElement('p');
+       errorP.style.color = 'red';
+       errorP.style.fontWeight = 'bold';
+       errorP.innerText = result.error;
+       outputDiv.appendChild(errorP);
+       console.error('%cExecution Error:', 'color: red; font-weight: bold', result.error);
+     }
+   } catch (error) {
+     outputDiv.innerText = 'Execution error: ' + error.message;
+     console.error('%cException:', 'color: red; font-weight: bold', error);
+   }
 };
 
 document.getElementById('runButton').addEventListener('click', runCode);

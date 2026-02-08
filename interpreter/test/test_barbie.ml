@@ -1,21 +1,22 @@
 (** Basic tests for the Barbie-lang interpreter *)
 
 let run_source src =
-  let tokens = Barbie_lib.Lexer.tokenize src in
-  let ast = Barbie_lib.Parser.parse tokens in
-  Barbie_lib.Eval.run ast
+   let tokens = Barbie_lib.Lexer.tokenize src in
+   let ast = Barbie_lib.Parser.parse tokens in
+   let (output, _debug) = Barbie_lib.Eval.run ast in
+   output
 
 let test name src expected =
-  let output = run_source src in
-  if output = expected then
-    Printf.printf "PASS: %s\n" name
-  else begin
-    Printf.printf "FAIL: %s\n  expected: [%s]\n  got:      [%s]\n"
-      name
-      (String.concat "; " expected)
-      (String.concat "; " output);
-    exit 1
-  end
+   let output = run_source src in
+   if output = expected then
+     Printf.printf "PASS: %s\n" name
+   else begin
+     Printf.printf "FAIL: %s\n  expected: [%s]\n  got:      [%s]\n"
+       name
+       (String.concat "; " expected)
+       (String.concat "; " output);
+     exit 1
+   end
 
 let () =
   (* Ken.say *)
