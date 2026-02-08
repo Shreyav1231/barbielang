@@ -4,6 +4,7 @@
 }
 
 * {
+  font-family: 'Bartex', sans-serif !important;
   box-sizing: border-box;
 }
 
@@ -45,7 +46,6 @@ svg.blocklySvg {
 pre,
 code {
   overflow: auto;
-  font-family: 'Bartex', monospace;
 }
 
 #pageContainer {
@@ -68,7 +68,6 @@ code {
   height: 100%;
   overflow: auto;
   padding: 1rem;
-  font-family: 'Bartex', sans-serif;
 }
 
 #quote {
@@ -88,7 +87,6 @@ code {
 #runButton {
   margin: 10px 0;
   padding: 10px 20px;
-  font-family: 'Bartex', sans-serif;
   font-size: 1.2rem;
   background-color: #FF69B4;
   color: white;
@@ -140,7 +138,6 @@ code {
   min-height: 40px;
   min-width: 200px;
   color: #FF1493;
-  font-family: 'Bartex', sans-serif;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
@@ -157,4 +154,31 @@ code {
   border-bottom: 0;
   margin-left: -12px;
   margin-bottom: -12px;
+}
+
+/* Barbie Context Menu Theme */
+.blocklyContextMenu {
+  background-color: #FFF0F5 !important;
+  border: 2px solid #FF69B4 !important;
+  border-radius: 12px !important;
+  padding: 8px 0 !important;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3) !important;
+}
+
+.blocklyContextMenu .blocklyMenuItem {
+  color: #C71585 !important;
+  font-family: 'Bartex', sans-serif !important;
+  font-size: 14px !important;
+  padding: 6px 16px !important;
+  transition: all 0.2s ease;
+}
+
+.blocklyContextMenu .blocklyMenuItem:hover,
+.blocklyContextMenu .blocklyMenuItem.blocklyMenuItemHover {
+  background-color: #FFB6C1 !important;
+  color: #FFFFFF !important;
+}
+
+.blocklyContextMenu .blocklyMenuItemBorder {
+  display: none !important; /* Hide default borders if present */
 }

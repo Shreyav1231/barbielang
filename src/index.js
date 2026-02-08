@@ -148,7 +148,7 @@ Blockly.Themes.Barbie = Blockly.Theme.defineTheme('barbie', {
   componentStyles: {
     workspaceBackgroundColour: '#FFF0F5',
     toolboxBackgroundColour: '#FFB6C1',
-    toolboxForegroundColour: '#FFFFFF',
+    toolboxForegroundColour: '#880E4F',
     flyoutBackgroundColour: '#FFC0CB',
     flyoutForegroundColour: '#FFFFFF',
     flyoutOpacity: 0.9,
