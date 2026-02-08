@@ -195,6 +195,44 @@ ws.addChangeListener((e) => {
   save(ws);
 });
 
+
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey || e.metaKey) {
+    const currentScale = ws.getScale();
+    if (e.key === '+' || e.key === '=') {
+      e.preventDefault();
+      ws.setScale(currentScale * 1.2);
+    }
+    if (e.key === '-') {
+      e.preventDefault();
+      ws.setScale(currentScale / 1.2);
+    }
+    if (e.key === '0') {
+      e.preventDefault();
+      ws.setScale(1);
+    }
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey || e.metaKey) {
+    const currentScale = ws.getScale();
+    if (e.key === '+' || e.key === '=') {
+      e.preventDefault();
+      ws.setScale(currentScale * 1.2);
+    }
+    if (e.key === '-') {
+      e.preventDefault();
+      ws.setScale(currentScale / 1.2);
+    }
+    if (e.key === '0') {
+      e.preventDefault();
+      ws.setScale(1);
+    }
+  }
+});
+
+
 // Whenever the workspace changes meaningfully, update the code preview.
 ws.addChangeListener((e) => {
   // Don't update when the workspace finishes loading; we're
