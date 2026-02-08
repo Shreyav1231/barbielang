@@ -1,0 +1,33 @@
+dream merge(left, right):
+  i = 0
+  j = 0
+  result = []
+  keepgoing i < len(left) and j < len(right):
+    feel left[i] < right[j]:
+      temp = [left[i]]
+      result = result + temp
+      i = i + 1
+    else:
+      temp = [right[j]]
+      result = result + temp
+      j = j + 1
+  feel i < len(left):
+    temp = left[i:len(left) - 1]
+    result = result + temp
+  else:
+    temp = right[j:len(right) - 1]
+    result = result + temp
+  gift result
+
+
+dream mergesort(ls):
+  feel len(ls) < 2:
+    gift ls
+  mid = len(ls) / 2
+  x = mergesort(ls[mid:len(ls) - 1])
+  y = mergesort(ls[0:mid])
+  gift merge(x, y)
+
+
+
+Ken.say(merge([4, 2, 9], [1, 0, 3]))

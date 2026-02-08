@@ -59,8 +59,8 @@ let eval_binop op l r =
   | Ast.Gt, VNum a, VNum b -> VBool (a > b)
   | Ast.Gte, VNum a, VNum b -> VBool (a >= b)
   (* Logical *)
-  | Ast.And, a, b -> if is_truthy a then b else a
-  | Ast.Or, a, b -> if is_truthy a then a else b
+  | Ast.And, a, b -> VBool (is_truthy a && is_truthy b)
+  | Ast.Or, a, b -> VBool (is_truthy a || is_truthy b)
   | _ -> raise (Runtime_error "Type error in binary operation")
 
 (** Output buffer — collects all Ken.say output *)
@@ -161,11 +161,11 @@ and eval_stmt (env : env) (stmt : Ast.stmt) : env =
     let rec try_branches = function
       | [] ->
         (match else_body with
-         | Some body -> eval_block env body; env
+         | Some body -> eval_block_to_env env body
          | None -> env)
       | (cond, body) :: rest ->
         if is_truthy (eval_expr env cond) then
-          (eval_block env body; env)
+          eval_block_to_env env body
         else
           try_branches rest
     in

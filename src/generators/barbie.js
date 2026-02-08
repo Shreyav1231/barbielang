@@ -226,10 +226,25 @@ barbieGenerator.forBlock['lists_getSublist'] = function(block) {
   // Get sublist.
   const list = barbieGenerator.valueToCode(block, 'LIST',
       barbieGenerator.Order.MEMBER) || '[]';
-  const at1 = barbieGenerator.valueToCode(block, 'AT1',
-      barbieGenerator.Order.NONE) || '0';
-  const at2 = barbieGenerator.valueToCode(block, 'AT2',
-      barbieGenerator.Order.NONE) || 'None';
+  
+  // Handle AT1 with "from start" option
+  let at1;
+  if (block.getField('WHERE1').getValue() === 'FROM_START') {
+    at1 = barbieGenerator.valueToCode(block, 'AT1',
+        barbieGenerator.Order.NONE) || '0';
+  } else {
+    at1 = '0';
+  }
+  
+  // Handle AT2 with "to end" option
+  let at2;
+  if (block.getField('WHERE2').getValue() === 'TO_END') {
+    at2 = '';
+  } else {
+    at2 = barbieGenerator.valueToCode(block, 'AT2',
+        barbieGenerator.Order.NONE) || 'len(' + list + ') - 1';
+  }
+  
   const code = list + '[' + at1 + ':' + at2 + ']';
   return [code, barbieGenerator.Order.MEMBER];
 };

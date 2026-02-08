@@ -154,6 +154,12 @@ Blockly.Msg['LISTS_CREATE_WITH_INPUT_WITH'] = 'list';
 Blockly.Msg['CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK'] = 'kenough';
 Blockly.Msg['CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE'] = 'kentinue';
 
+Blockly.Msg['MATH_MULTIPLICATION_SYMBOL'] = '*';
+Blockly.Msg['MATH_DIVISION_SYMBOL'] = '/';
+
+Blockly.Msg['LOGIC_COMPARE_OPERATOR_LTE'] = '<=';
+Blockly.Msg['LOGIC_COMPARE_OPERATOR_GTE'] = '>=';
+
 // Define Barbie theme with pink colors
 Blockly.Themes.Barbie = Blockly.Theme.defineTheme('barbie', {
   base: Blockly.Themes.Classic,
