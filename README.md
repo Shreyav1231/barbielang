@@ -48,3 +48,9 @@ You can disable, reconfigure, or replace any of these tools at any time, but the
 To run your app locally, run `npm run start` to run the development server. This mode generates source maps and ingests the source maps created by Blockly, so that you can debug using unminified code.
 
 To deploy your app so that others can use it, run `npm run build` to run a production build. This will bundle your code and minify it to reduce its size. You can then host the contents of the `dist` directory on a web server of your choosing. If you're just getting started, try using [GitHub Pages](https://pages.github.com/).
+
+### Future plans 
+- Add message passing among different barbies in barbieland
+- Add exetnsive documentation for the language 
+- Add teaching features like code examples and tutorials 
+- Sprite addition with code visualizations 
