@@ -4,7 +4,7 @@ _In barbielang, anything is possible ✨_
 
 # Barbielang
 
-A barbie-themed block-based programming language built in 24 hours for [InnovateHer 2026](https://innovateher-2026.devpost.com/). Won 2nd place in 33 submissions. [Try it here](https://kartva.github.io/barbie-lang/). See the (much longer) [original DevPost submission](https://devpost.com/software/barbielang).
+A barbie-themed block-based programming language built in 24 hours for [InnovateHer 2026](https://innovateher-2026.devpost.com/). Won 2nd place in 33 submissions. [Try it here](https://kartva.github.io/barbie-lang/). See the (much longer) [original DevPost submission](https://devpost.com/software/barbielang). Built with [Shreya](https://github.com/Shreyav1231), [Suhani](https://github.com/SuhaniDadhich3) and [Pooja](https://github.com/PoojaThiru).
 
 ## What.
 
