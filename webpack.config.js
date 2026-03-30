@@ -1,6 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // Base config that applies to either development or production mode.
 const config = {
@@ -60,6 +63,11 @@ const config = {
     // Generate the HTML index page based on our template.
     // This will output the same index page with the bundle we
     // created above added in a script tag.
+    new webpack.DefinePlugin({
+      'process.env.SERVICE_ID': JSON.stringify(process.env.SERVICE_ID),
+      'process.env.TEMPLATE_ID': JSON.stringify(process.env.TEMPLATE_ID),
+      'process.env.PUBLIC_KEY': JSON.stringify(process.env.PUBLIC_KEY),
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
     }),

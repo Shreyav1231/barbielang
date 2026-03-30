@@ -5,6 +5,25 @@
     <title>Blockly Sample App</title>
   </head>
   <body>
+    <button id="emailDevButton">✉ Email Barbielang</button>
+
+    <div id="emailModal" class="email-modal-overlay">
+      <div class="email-modal">
+        <button id="emailModalClose">✕</button>
+        <h2>Message barbielang Developers</h2>
+        <form id="emailForm">
+          <label>Name</label>
+          <input type="text" name="user_name" required />
+          <!-- <label>Email</label>
+          <input type="email" name="user_email" required /> -->
+          <label>Message</label>
+          <textarea name="message" required></textarea>
+          <input type="submit" value="Send ✨" />
+        </form>
+        <p id="emailStatus"></p>
+      </div>
+    </div>
+
     <div id="splash-screen">
       <img id="splash-logo" alt="Barbie Lang" />
     </div>
@@ -13,7 +32,7 @@
         <pre id="generatedCode"><code></code></pre>
         <button id="runButton">Run Barbie Code</button>
         <div id="barbie-container">
-          <div id="barbie-bubble">Hello! I'm ready to Barbie-code!</div>
+          <div id="barbie-bubble">Come on barbie, let's go party!</div>
           <img id="barbie-head" alt="Barbie" />
         </div>
       </div>

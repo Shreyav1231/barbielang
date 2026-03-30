@@ -26,7 +26,6 @@ Frontend derived from [Blockly](https://developers.google.com/blockly), the same
 
 ## Why?
 
-
 <details>
   <summary>
     TLDR: no rules that say coding can't be pink.
@@ -40,3 +39,9 @@ This is why we created barbielang. Going off of Barbie’s cultural idea, “Any
 
 barbielang doesn’t make coding easier by removing concepts or simplifying logic. Instead, it makes coding more relatable. The same foundational ideas like conditions, loops, variables, and functions are all still there, but presented in a way that feels more human and approachable. As an entry point, BarbieLang helps learners build confidence first, so they’re better prepared to transition into traditional programming languages later.
 </details>
+
+## Setup
+```npm install```
+```cd src```
+```npm start``` 
+

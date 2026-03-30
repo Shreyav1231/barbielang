@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Bartex';
-  src: url('../public/Bartex.ttf') format('truetype');
+  src: url('../public/Bartex.otf') format('truetype');
 }
 
 * {
@@ -342,4 +342,138 @@ code {
 
 .blocklyDropDownContent .blocklyMenu .blocklyMenuItemContent {
   font-family: 'Bartex', sans-serif !important;
+}
+
+/* Email button */
+#emailDevButton {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  padding: 8px 16px;
+  font-family: 'Bartex', sans-serif;
+  font-size: 0.95rem;
+  background-color: #FF69B4;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+#emailDevButton:hover {
+  background-color: #FF1493;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.email-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(199, 21, 133, 0.3);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-modal-overlay.active {
+  display: flex;
+}
+
+.email-modal {
+  position: relative;
+  background: #FFF0F5;
+  border: 3px solid #FF69B4;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 380px;
+  max-width: 90vw;
+  box-shadow: 0 8px 24px rgba(255, 105, 180, 0.4);
+}
+
+.email-modal h2 {
+  margin: 0 0 1.2rem;
+  color: #C71585;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+#emailModalClose {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: #FF69B4;
+  cursor: pointer;
+  font-family: 'Bartex', sans-serif;
+}
+
+#emailModalClose:hover {
+  color: #C71585;
+}
+
+.email-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.email-modal label {
+  color: #C71585;
+  font-size: 0.9rem;
+}
+
+.email-modal input[type="text"],
+.email-modal input[type="email"],
+.email-modal textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #FFB6C1;
+  border-radius: 12px;
+  font-family: 'Bartex', sans-serif;
+  font-size: 0.9rem;
+  background: white;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.email-modal input[type="text"]:focus,
+.email-modal input[type="email"]:focus,
+.email-modal textarea:focus {
+  border-color: #FF69B4;
+}
+
+.email-modal textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.email-modal input[type="submit"] {
+  margin-top: 0.5rem;
+  padding: 10px;
+  background-color: #FF69B4;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-family: 'Bartex', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.email-modal input[type="submit"]:hover {
+  background-color: #FF1493;
+  transform: translateY(-1px);
+}
+
+#emailStatus {
+  margin: 0.75rem 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  min-height: 1.2em;
 }

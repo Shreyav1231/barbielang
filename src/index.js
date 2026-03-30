@@ -13,6 +13,7 @@ import './index.css';
 import barbieHead from '../public/barbie-head.png';
 import splashImage from '../public/splash-screen.png';
 import './barbie_interpreter';
+import {initEmailButton} from './features/email-barbielang';
 
 document.title = 'barbie-lang';
 
@@ -387,3 +388,5 @@ ws.addChangeListener((e) => {
     createGlitterBurst();
   }
 });
+
+initEmailButton();
